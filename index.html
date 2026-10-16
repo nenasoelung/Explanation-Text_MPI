@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Interaktif - Explanation Text | SMP Kelas 9</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Nunito untuk tampilan ramah anak -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        // Custom Tailwind Configuration for Theme Colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#EF4444',
+                        brandBlue: '#2563EB',
+                        brandYellow: '#F59E0B',
+                        brandLightYellow: '#FEF3C7',
+                        brandLightBlue: '#EFF6FF',
+                        brandLightRed: '#FEF2F2'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        nunito: ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #F8FAFC;
+        }
+
+        /* 3D Flip Card Effect */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Speech Bubble Tail */
+        .bubble-left::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 20px;
+            border-width: 8px 12px 8px 0;
+            border-style: solid;
+            border-color: transparent #FFFFFF transparent transparent;
+        }
+        .bubble-right::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 20px;
+            border-width: 8px 0 8px 12px;
+            border-style: solid;
+            border-color: transparent transparent transparent #FFFFFF;
+        }
+
+        /* Highlight classes for text decomposition */
+        .highlight-general {
+            background-color: #FEF08A;
+            border-bottom: 3px solid #EAB308;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .highlight-sequence {
+            background-color: #BFDBFE;
+            border-bottom: 3px solid #3B82F6;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .highlight-language {
+            background-color: #FECACA;
+            border-bottom: 3px solid #EF4444;
+            font-weight: 700;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94A3B8;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748B;
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen border-t-8 border-brandRed">
+
+    <!-- HEADER UTAMA -->
+    <header class="bg-gradient-to-r from-red-500 via-blue-600 to-amber-500 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
+            <!-- Title & Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="bg-white text-brandRed p-3 rounded-2xl shadow-md text-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-volcano text-amber-500 animate-bounce"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold font-fredoka tracking-wide">EXPLANATION TEXT: THE LIFE PHENOMENA</h1>
+                    <p class="text-xs md:text-sm text-amber-200 font-semibold flex items-center gap-2">
+                        <span class="bg-white/20 px-2 py-0.5 rounded-full"><i class="fa-solid fa-graduation-cap"></i> Bahasa Inggris SMP Kelas 9 (Fase D)</span>
+                        <span class="hidden sm:inline">• Pengembang: Neneng Noeraeni Aprianti, M.Pd</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Developer Badge Mobile -->
+            <div class="mt-2 md:mt-0 text-xs bg-amber-400 text-slate-900 font-bold px-3 py-1.5 rounded-full shadow border-2 border-white flex items-center gap-1">
+                <i class="fa-solid fa-user-check"></i> Neneng Noeraeni Aprianti, M.Pd
+            </div>
+        </div>
+
+        <!-- NAVIGASI UTAMA (6 TAB SPA) -->
+        <nav class="bg-slate-900/40 backdrop-blur-md border-t border-white/20 overflow-x-auto">
+            <div class="max-w-7xl mx-auto flex space-x-1 p-2 min-w-max">
+                <button onclick="switchTab('home')" id="tab-home" class="nav-btn bg-amber-400 text-slate-900 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-house"></i> Home
+                </button>
+                <button onclick="switchTab('objective')" id="tab-objective" class="nav-btn text-white hover:bg-white/10 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-bullseye"></i> Learning Objective
+                </button>
+                <button onclick="switchTab('material')" id="tab-material" class="nav-btn text-white hover:bg-white/10 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-book-open"></i> Material
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-btn text-white hover:bg-white/10 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question"></i> Kuis Interaktif
+                </button>
+                <button onclick="switchTab('exercises')" id="tab-exercises" class="nav-btn text-white hover:bg-white/10 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece"></i> Latihan Interaktif
+                </button>
+                <button onclick="switchTab('about')" id="tab-about" class="nav-btn text-white hover:bg-white/10 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i> Tentang
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- KONTEN UTAMA WIDGET CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- ==================== 1. TAB HOME ==================== -->
+        <section id="content-home" class="tab-content block space-y-8">
+            <!-- Welcome Banner -->
+            <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-20 text-white text-9xl">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <div class="relative z-10 max-w-3xl space-y-3">
+                    <span class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Interactive English Media</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold font-fredoka leading-tight">Welcome Students! Let's Explore Natural Phenomena in English!</h2>
+                    <p class="text-sm md:text-base text-blue-100 font-medium">
+                        Pernahkah kamu penasaran bagaimana gunung berapi meletus atau bagaimana hujan bisa turun dari langit? Yuk pelajari caranya menjelaskan fenomena alam tersebut melalui **Explanation Text**!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Dialogue Component (Budi & Siti) -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                <div class="flex items-center gap-2 text-brandBlue font-bold font-fredoka text-lg border-b pb-2">
+                    <i class="fa-solid fa-comments text-xl"></i> Short Dialogue: Natural Phenomena
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <!-- Budi Dialogue Card -->
+                    <div class="flex items-start space-x-4 bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                        <div class="w-16 h-16 rounded-full bg-amber-400 border-4 border-white shadow flex items-center justify-center text-3xl flex-shrink-0">
+                            👦
+                        </div>
+                        <div class="relative bg-white p-4 rounded-2xl shadow-sm border border-amber-100 bubble-left text-sm space-y-1">
+                            <span class="font-bold text-amber-700 block">Budi</span>
+                            <p class="text-slate-700 font-semibold italic">"Hey Siti! Have you ever wondered how volcanic eruptions happen or how rain falls from the sky?"</p>
+                        </div>
+                    </div>
+
+                    <!-- Siti Dialogue Card -->
+                    <div class="flex items-start space-x-4 bg-blue-50 p-4 rounded-2xl border border-blue-200 flex-row-reverse md:flex-row space-x-reverse md:space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-blue-500 text-white border-4 border-white shadow flex items-center justify-center text-3xl flex-shrink-0">
+                            👧
+                        </div>
+                        <div class="relative bg-white p-4 rounded-2xl shadow-sm border border-blue-100 bubble-right text-sm space-y-1">
+                            <span class="font-bold text-blue-700 block">Siti</span>
+                            <p class="text-slate-700 font-semibold italic">"Yes Budi! In English, we explain these scientific phenomena using <strong>Explanation Text</strong>! Let me show you how it works!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Animated Volcano Eruption Canvas -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b pb-3">
+                    <div>
+                        <h3 class="text-xl font-bold font-fredoka text-brandRed flex items-center gap-2">
+                            <i class="fa-solid fa-volcano"></i> Interactive Volcanic Eruption Simulation
+                        </h3>
+                        <p class="text-xs md:text-sm text-slate-500">Klik tombol tahapan untuk melihat animasi fenomena gunung meletus beserta label penjelasannya!</p>
+                    </div>
+                    <!-- Controls -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="triggerEruptionStage(1)" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1 shadow">
+                            <i class="fa-solid fa-fire-flame-curved"></i> Stage 1: Magma Pressure
+                        </button>
+                        <button onclick="triggerEruptionStage(2)" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1 shadow">
+                            <i class="fa-solid fa-explosion"></i> Stage 2: Eruption Peak
+                        </button>
+                        <button onclick="triggerEruptionStage(3)" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1 shadow">
+                            <i class="fa-solid fa-cloud-sun"></i> Stage 3: Lava & Ash Cloud
+                        </button>
+                        <button onclick="resetVolcano()" class="bg-slate-600 hover:bg-slate-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1">
+                            <i class="fa-solid fa-rotate-left"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulation Canvas Wrapper -->
+                <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-inner border-4 border-slate-800 h-80 flex justify-center items-center">
+                    <canvas id="volcanoCanvas" width="800" height="350" class="w-full h-full object-cover"></canvas>
+                    
+                    <!-- Overlay Tooltip Info Box -->
+                    <div id="volcanoInfoBox" class="absolute bottom-4 left-4 right-4 bg-slate-900/90 text-white p-3.5 rounded-xl border border-amber-400 backdrop-blur-sm transition-all duration-300">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-amber-500 rounded-lg text-slate-900 font-bold text-lg"><i class="fa-solid fa-circle-info"></i></div>
+                            <div>
+                                <h4 id="volcanoInfoTitle" class="font-bold text-amber-300 font-fredoka text-base">Stage 0: Normal Volcano Condition</h4>
+                                <p id="volcanoInfoDesc" class="text-xs md:text-sm text-slate-200">The volcano is calm. Magma rests deep inside the magma chamber beneath the crust.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 2. TAB LEARNING OBJECTIVE ==================== -->
+        <section id="content-objective" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-6 text-white shadow-md">
+                <h2 class="text-2xl font-bold font-fredoka flex items-center gap-2">
+                    <i class="fa-solid fa-bullseye text-amber-400"></i> Tujuan Pembelajaran (Learning Objectives)
+                </h2>
+                <p class="text-sm text-blue-100 mt-1">Capaian Pembelajaran (CP) Bahasa Inggris Fase D - SMP Kelas 9</p>
+            </div>
+
+            <!-- Objectives Grid Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-100 space-y-3 relative overflow-hidden">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-magnifying-glass font-bold"></i>
+                    </div>
+                    <h3 class="font-bold font-fredoka text-slate-800 text-lg">1. Identify Function & Structure</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Siswa mampu mengidentifikasi **fungsi sosial**, **struktur teks** (General Statement, Sequenced Explanation, Closing), dan **unsur kebahasaan** dari Explanation Text tentang fenomena alam.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-2 border-red-100 space-y-3 relative overflow-hidden">
+                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-book-reader"></i>
+                    </div>
+                    <h3 class="font-bold font-fredoka text-slate-800 text-lg">2. Analyze & Comprehend Texts</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Siswa mampu menganalisis dan menemukan informasi rinci serta gagasan utama dari teks bacaan Explanation Text seperti terjadinya gunung meletus dan hujan.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-2 border-amber-100 space-y-3 relative overflow-hidden">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-pen-ruler"></i>
+                    </div>
+                    <h3 class="font-bold font-fredoka text-slate-800 text-lg">3. Construct & Write Text</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Siswa mampu menyusun kembali paragraf acak secara runtut dan membuat esai pendek Explanation Text karya sendiri menggunakan Bahasa Inggris secara kontekstual.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Progress Tracker / Student Checklist -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                <h3 class="font-bold font-fredoka text-slate-800 text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-green-500"></i> My Target Checklist (Target Belajar Saya)
+                </h3>
+                <p class="text-xs text-slate-500">Centang target yang telah berhasil kamu selesaikan selama belajar di media ini:</p>
+
+                <div class="space-y-3" id="checklistContainer">
+                    <label class="flex items-center p-3 bg-slate-50 rounded-xl hover:bg-slate-100 cursor-pointer transition">
+                        <input type="checkbox" onchange="updateChecklist()" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                        <span class="ml-3 text-sm font-semibold text-slate-700">Saya memahami pengertian dan tujuan dari Explanation Text.</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-50 rounded-xl hover:bg-slate-100 cursor-pointer transition">
+                        <input type="checkbox" onchange="updateChecklist()" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                        <span class="ml-3 text-sm font-semibold text-slate-700">Saya bisa membedakan General Statement dan Sequenced Explanation.</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-50 rounded-xl hover:bg-slate-100 cursor-pointer transition">
+                        <input type="checkbox" onchange="updateChecklist()" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                        <span class="ml-3 text-sm font-semibold text-slate-700">Saya dapat mengerjakan Kuis Membaca (Literacy Activity) dengan nilai baik.</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-50 rounded-xl hover:bg-slate-100 cursor-pointer transition">
+                        <input type="checkbox" onchange="updateChecklist()" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                        <span class="ml-3 text-sm font-semibold text-slate-700">Saya mampu menyusun kalimat acak fenomena hujan dengan benar.</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-50 rounded-xl hover:bg-slate-100 cursor-pointer transition">
+                        <input type="checkbox" onchange="updateChecklist()" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
+                        <span class="ml-3 text-sm font-semibold text-slate-700">Saya telah berhasil menulis esai penjelasan fenomena alam milik saya sendiri.</span>
+                    </label>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="pt-2">
+                    <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                        <span>Progress Belajar Kamu:</span>
+                        <span id="checklistPercentage">0% Completed</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                        <div id="checklistBar" class="bg-green-500 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 3. TAB MATERIAL ==================== -->
+        <section id="content-material" class="tab-content hidden space-y-8">
+            <!-- Header Section -->
+            <div class="bg-gradient-to-r from-red-500 to-amber-500 rounded-3xl p-6 text-white shadow-md">
+                <h2 class="text-2xl font-bold font-fredoka flex items-center gap-2">
+                    <i class="fa-solid fa-book text-yellow-200"></i> Material: What is Explanation Text?
+                </h2>
+                <p class="text-sm text-red-100 mt-1">Materi Pembelajaran Lengkap Explanation Text (Social Function, Generic Structure, & Language Features)</p>
+            </div>
+
+            <!-- Explanation Text Definition & Function -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-2 border-red-100 space-y-3">
+                    <div class="flex items-center gap-2 text-brandRed font-bold font-fredoka text-lg">
+                        <i class="fa-solid fa-lightbulb"></i> Definition (Pengertian)
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        <strong>Explanation Text</strong> is a non-fiction text that tells <em>how</em> or <em>why</em> natural, scientific, or social phenomena happen.
+                    </p>
+                    <p class="text-xs text-slate-500 bg-red-50 p-3 rounded-xl border border-red-100 italic">
+                        (Explanation Text adalah teks ilmiah non-fiksi yang menjelaskan proses 'bagaimana' atau 'mengapa' suatu fenomena alam atau ilmiah dapat terjadi).
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-100 space-y-3">
+                    <div class="flex items-center gap-2 text-brandBlue font-bold font-fredoka text-lg">
+                        <i class="fa-solid fa-bullseye"></i> Social Function (Tujuan Sosial)
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        To explain the processes involved in the formation or working of natural, social, or scientific phenomena.
+                    </p>
+                    <p class="text-xs text-slate-500 bg-blue-50 p-3 rounded-xl border border-blue-100 italic">
+                        (Tujuannya adalah untuk menjelaskan urutan proses terjadinya suatu peristiwa alam seperti gunung meletus, hujan, pelangi, tsunami, dll).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Generic Structure Interactive Cards -->
+            <div class="space-y-4">
+                <h3 class="font-bold font-fredoka text-xl text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-blue-600"></i> Generic Structure (Struktur Teks)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Structure 1 -->
+                    <div class="bg-yellow-50 border-2 border-amber-300 p-5 rounded-2xl space-y-2 relative">
+                        <span class="bg-amber-400 text-slate-900 text-xs font-extrabold px-2.5 py-1 rounded-full uppercase">Part 1</span>
+                        <h4 class="font-bold font-fredoka text-amber-900 text-lg">General Statement</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Pernyataan umum yang memperkenalkan fenomena alam yang akan dijelaskan (misalnya: definisi gunung berapi).
+                        </p>
+                    </div>
+
+                    <!-- Structure 2 -->
+                    <div class="bg-blue-50 border-2 border-blue-300 p-5 rounded-2xl space-y-2 relative">
+                        <span class="bg-blue-500 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase">Part 2</span>
+                        <h4 class="font-bold font-fredoka text-blue-900 text-lg">Sequenced Explanation</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Serangkaian paragraf yang menjelaskan langkah-langkah atau sebab-akibat terjadinya fenomena secara berurutan.
+                        </p>
+                    </div>
+
+                    <!-- Structure 3 -->
+                    <div class="bg-red-50 border-2 border-red-300 p-5 rounded-2xl space-y-2 relative">
+                        <span class="bg-red-500 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase">Part 3</span>
+                        <h4 class="font-bold font-fredoka text-red-900 text-lg">Closing / Conclusion</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Kesimpulan singkat atau penutup dari keseluruhan penjelasan fenomena (bersifat opsional).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Features Explorer -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                <h3 class="font-bold font-fredoka text-xl text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-code text-amber-500"></i> Language Features (Ciri Kebahasaan)
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+                        <span class="text-xs font-bold text-red-500 block">1. Simple Present Tense</span>
+                        <p class="text-xs text-slate-600">Menggunakan fakta umum. (e.g., <em>Magma collects in a chamber.</em>)</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+                        <span class="text-xs font-bold text-blue-600 block">2. Passive Voice</span>
+                        <p class="text-xs text-slate-600">Fokus pada objek peristiwa. (e.g., <em>Ash is thrown high into the sky.</em>)</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+                        <span class="text-xs font-bold text-amber-600 block">3. Sequential Connectives</span>
+                        <p class="text-xs text-slate-600">Kata hubung waktu: <em>First, then, next, finally, as a result.</em></p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+                        <span class="text-xs font-bold text-green-600 block">4. Action Verbs</span>
+                        <p class="text-xs text-slate-600">Kata kerja tindakan: <em>Erupts, flows, melts, forms, rises.</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Text Decomposition Example -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b pb-3">
+                    <div>
+                        <h3 class="font-bold font-fredoka text-xl text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brandBlue"></i> Interactive Text Analyzer
+                        </h3>
+                        <p class="text-xs text-slate-500">Uji langsung struktur teks dengan menekan tombol sorot di bawah ini!</p>
+                    </div>
+                    <!-- Highlight Toggle Buttons -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="toggleHighlight('general')" class="bg-amber-400 hover:bg-amber-500 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-xl transition shadow">
+                            <i class="fa-solid fa-highlighter"></i> Highlight General Statement
+                        </button>
+                        <button onclick="toggleHighlight('sequence')" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow">
+                            <i class="fa-solid fa-highlighter"></i> Highlight Sequence
+                        </button>
+                        <button onclick="toggleHighlight('language')" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow">
+                            <i class="fa-solid fa-highlighter"></i> Highlight Passive & Connectives
+                        </button>
+                        <button onclick="clearHighlights()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition">
+                            Clear Highlights
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Text Sample Box -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-sm md:text-base leading-relaxed space-y-4 font-semibold text-slate-700" id="interactiveTextSample">
+                    <p>
+                        <span id="part-gen" class="transition-all duration-300">A volcanic eruption is a powerful natural phenomenon where magma, ash, and gases escape from beneath the Earth's crust onto the surface.</span>
+                    </p>
+                    <p>
+                        <span id="part-seq1" class="transition-all duration-300">Deep underground, extreme heat melts rock to form liquid magma. <span id="lang-conn1">First</span>, magma collects in a chamber beneath the volcano. <span id="lang-pass1">As pressure builds up</span>, the magma is forced upwards through cracks and vents in the rocks.</span>
+                    </p>
+                    <p>
+                        <span id="part-seq2" class="transition-all duration-300"><span id="lang-conn2">When</span> the pressure becomes too high, the volcano erupts. Hot lava, poisonous gas, and volcanic ash <span id="lang-pass2">are blasted into the atmosphere</span>. <span id="lang-conn3">As a result</span>, lava flows down the mountain slopes, cooling into solid rock over time.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Vocabulary Flashcards with TTS -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold font-fredoka text-xl text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-clone text-brandRed"></i> Interactive Vocabulary Flashcards
+                    </h3>
+                    <span class="text-xs text-slate-400">Klik kartu untuk membalik & dengarkan pelafalannya!</span>
+                </div>
+
+                <!-- Grid Flashcards -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    <!-- Flashcard 1 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-amber-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-amber-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-volcano text-3xl text-amber-500"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Volcano</span>
+                                <button onclick="event.stopPropagation(); speakText('Volcano')" class="bg-amber-400 text-slate-900 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-amber-500">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-amber-500 text-slate-900 flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Gunung Berapi</span>
+                                <p class="text-xs text-amber-9 font-medium">A mountain with an opening where lava erupts.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 2 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-red-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-red-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-explosion text-3xl text-red-500"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Eruption</span>
+                                <button onclick="event.stopPropagation(); speakText('Eruption')" class="bg-red-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-red-600">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-red-500 text-white flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Letusan / Erupsi</span>
+                                <p class="text-xs text-red-100 font-medium">An act or instance of erupting.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 3 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-blue-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-blue-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-temperature-full text-3xl text-blue-500"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Magma</span>
+                                <button onclick="event.stopPropagation(); speakText('Magma')" class="bg-blue-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-blue-600">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-blue-600 text-white flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Magma</span>
+                                <p class="text-xs text-blue-100 font-medium">Hot liquid rock beneath Earth's crust.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 4 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-amber-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-amber-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-fire text-3xl text-amber-600"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Lava</span>
+                                <button onclick="event.stopPropagation(); speakText('Lava')" class="bg-amber-400 text-slate-900 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-amber-500">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-amber-500 text-slate-900 flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Lahar / Lava</span>
+                                <p class="text-xs text-amber-9 font-medium">Magma that reaches Earth's surface.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 5 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-blue-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-blue-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-cloud-showers-heavy text-3xl text-blue-600"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Evaporate</span>
+                                <button onclick="event.stopPropagation(); speakText('Evaporate')" class="bg-blue-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-blue-600">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-blue-600 text-white flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Menguap</span>
+                                <p class="text-xs text-blue-100 font-medium">Turn from liquid into gas vapor.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 6 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-blue-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-blue-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-cloud text-3xl text-blue-400"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Condensation</span>
+                                <button onclick="event.stopPropagation(); speakText('Condensation')" class="bg-blue-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-blue-600">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-blue-600 text-white flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Kondensasi</span>
+                                <p class="text-xs text-blue-100 font-medium">Vapor turns into water droplets.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 7 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-red-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-red-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-water text-3xl text-red-500"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Tsunami</span>
+                                <button onclick="event.stopPropagation(); speakText('Tsunami')" class="bg-red-500 text-white text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-red-600">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-red-500 text-white flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Tsunami</span>
+                                <p class="text-xs text-red-100 font-medium">Giant ocean waves caused by earthquakes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 8 -->
+                    <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner border-2 border-amber-300 rounded-2xl shadow-sm">
+                            <div class="flip-card-front bg-amber-50 flex flex-col items-center justify-center p-3 space-y-2">
+                                <i class="fa-solid fa-earth-americas text-3xl text-amber-500"></i>
+                                <span class="font-bold text-slate-800 text-base font-fredoka">Tectonic Plates</span>
+                                <button onclick="event.stopPropagation(); speakText('Tectonic Plates')" class="bg-amber-400 text-slate-900 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 hover:bg-amber-500">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                            </div>
+                            <div class="flip-card-back bg-amber-500 text-slate-900 flex flex-col items-center justify-center p-3 space-y-1">
+                                <span class="font-bold text-sm">Lempeng Tektonik</span>
+                                <p class="text-xs text-amber-9 font-medium">Massive rock slabs on Earth's crust.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 4. TAB KUIS INTERAKTIF ==================== -->
+        <section id="content-quiz" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-amber-500 to-red-500 rounded-3xl p-6 text-white shadow-md flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold font-fredoka flex items-center gap-2">
+                        <i class="fa-solid fa-pen-clip text-amber-200"></i> Kuis Interaktif: Literacy Activity
+                    </h2>
+                    <p class="text-sm text-amber-100 mt-1">Bacalah teks fenomena gunung meletus dan jawab 5 pertanyaan pilihan ganda di bawah ini!</p>
+                </div>
+                <!-- Score Counter Badge -->
+                <div class="bg-white text-slate-800 font-fredoka px-4 py-2 rounded-2xl shadow flex items-center gap-2 font-bold text-lg">
+                    <i class="fa-solid fa-star text-amber-400 text-2xl"></i> Score: <span id="quizScoreText" class="text-red-500">0 / 5</span>
+                </div>
+            </div>
+
+            <!-- Reading Passage Container -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-3">
+                <div class="flex items-center gap-2 text-red-600 font-bold font-fredoka text-lg border-b pb-2">
+                    <i class="fa-solid fa-book-open-reader"></i> Reading Passage: How Volcanic Eruptions Happen
+                </div>
+                <div class="bg-amber-50/60 p-5 rounded-2xl border border-amber-200 text-sm leading-relaxed text-slate-700 space-y-3 font-medium">
+                    <p>
+                        A volcanic eruption occurs when pressure beneath Earth's crust forces molten rock, known as magma, to rise to the surface. Deep inside the Earth, temperatures are hot enough to melt rocks into a thick liquid. Because magma is lighter than the solid rock around it, it rises and collects in magma chambers beneath volcanoes.
+                    </p>
+                    <p>
+                        Over time, gas dissolved in the magma expands, creating intense pressure. When this pressure becomes too strong, the magma escapes through vents and craters. As a result, ash, hot gas, and liquid lava are forcefully ejected into the air. Eventually, the lava cools down on the slopes, building up layers that form the shape of a volcanic mountain.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5 Multiple Choice Questions Container -->
+            <div class="space-y-6" id="quizQuestionsContainer">
+                <!-- Questions rendered dynamically by JS script -->
+            </div>
+
+            <!-- Quiz Submit & Result Banner -->
+            <div class="flex justify-end pt-4">
+                <button onclick="resetQuiz()" class="bg-slate-600 hover:bg-slate-700 text-white font-bold px-6 py-3 rounded-2xl shadow transition flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i> Reset & Try Again
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ==================== 5. TAB LATIHAN INTERAKTIF ==================== -->
+        <section id="content-exercises" class="tab-content hidden space-y-6">
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 rounded-3xl p-6 text-white shadow-md">
+                <h2 class="text-2xl font-bold font-fredoka flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-amber-300"></i> Latihan Interaktif (Interactive Exercises)
+                </h2>
+                <p class="text-sm text-blue-100 mt-1">Pilih salah satu dari 3 modul latihan seru di bawah ini untuk mengasah pemahamanmu!</p>
+            </div>
+
+            <!-- Sub-Nav for Exercises Modules -->
+            <div class="flex space-x-2 border-b pb-3 overflow-x-auto">
+                <button onclick="switchExerciseSubtab('sub-reorder')" id="subtab-reorder" class="sub-nav-btn bg-blue-600 text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow transition">
+                    <i class="fa-solid fa-arrow-down-short-wide"></i> A. Reorder Rain Cycle (Drag & Drop)
+                </button>
+                <button onclick="switchExerciseSubtab('sub-match')" id="subtab-match" class="sub-nav-btn bg-slate-200 text-slate-700 hover:bg-slate-300 px-4 py-2.5 rounded-xl font-bold text-sm transition">
+                    <i class="fa-solid fa-link"></i> B. Matching Game (Disasters)
+                </button>
+                <button onclick="switchExerciseSubtab('sub-essay')" id="subtab-essay" class="sub-nav-btn bg-slate-200 text-slate-700 hover:bg-slate-300 px-4 py-2.5 rounded-xl font-bold text-sm transition">
+                    <i class="fa-solid fa-feather-pointed"></i> C. Guided Essay Writer
+                </button>
+            </div>
+
+            <!-- SUB-TASK A: Reordering Task ("How Rain Happens") -->
+            <div id="exercise-reorder" class="sub-exercise-content space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                    <div class="border-b pb-2">
+                        <h3 class="font-bold font-fredoka text-lg text-blue-600 flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-showers-heavy"></i> Menyusun Kalimat Teks Eksplanasi tentang Hujan (Rain Cycle)
+                        </h3>
+                        <p class="text-xs text-slate-500">Gunakan tombol Panah ATAU Drag & Drop untuk mengurutkan kalimat di bawah ini menjadi paragraf yang runtut!</p>
+                    </div>
+
+                    <!-- Reorderable List Container -->
+                    <div id="reorderContainer" class="space-y-3">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Check & Reset Buttons -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <button onclick="checkReorderAnswer()" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-5 py-2.5 rounded-xl shadow transition flex items-center gap-2">
+                            <i class="fa-solid fa-check"></i> Check Order
+                        </button>
+                        <button onclick="resetReorderTask()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-4 py-2.5 rounded-xl transition">
+                            Reset Sequence
+                        </button>
+                    </div>
+
+                    <!-- Result Notification Box -->
+                    <div id="reorderFeedback" class="hidden p-4 rounded-2xl text-sm font-semibold transition-all"></div>
+                </div>
+            </div>
+
+            <!-- SUB-TASK B: Matching Game ("Disasters & Definitions") -->
+            <div id="exercise-match" class="sub-exercise-content hidden space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                    <div class="border-b pb-2 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold font-fredoka text-lg text-amber-600 flex items-center gap-2">
+                                <i class="fa-solid fa-handshake"></i> Matching Game: Natural Disasters & Definitions
+                            </h3>
+                            <p class="text-xs text-slate-500">Klik nama Bencana Alam di sebelah kiri, lalu klik Definisi yang sesuai di sebelah kanan!</p>
+                        </div>
+                        <div class="text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1.5 rounded-full">
+                            Matched: <span id="matchCounter">0</span> / 5
+                        </div>
+                    </div>
+
+                    <!-- Matching Columns Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Left Column: Disasters -->
+                        <div class="space-y-3" id="matchDisasterCol">
+                            <!-- Rendered by JS -->
+                        </div>
+
+                        <!-- Right Column: Definitions -->
+                        <div class="space-y-3" id="matchDefCol">
+                            <!-- Rendered by JS -->
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="resetMatchingGame()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-4 py-2.5 rounded-xl transition text-xs">
+                            <i class="fa-solid fa-rotate-right"></i> Reset Matching Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-TASK C: Guided Writing Essay Activity -->
+            <div id="exercise-essay" class="sub-exercise-content hidden space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4">
+                    <div class="border-b pb-2">
+                        <h3 class="font-bold font-fredoka text-lg text-red-500 flex items-center gap-2">
+                            <i class="fa-solid fa-pen-nib"></i> Guided Writing: Create Your Explanation Text
+                        </h3>
+                        <p class="text-xs text-slate-500">Isilah bagian-bagian di bawah ini untuk membuat teks penjelasan fenomena alam milikmu sendiri!</p>
+                    </div>
+
+                    <!-- Input Form Fields -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">1. Text Title (Judul Fenomena Alam)</label>
+                            <input type="text" id="essayTitle" placeholder="e.g., How Rainbows Appear" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-red-400 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-amber-700 mb-1">2. General Statement (Pernyataan Umum)</label>
+                            <textarea id="essayGeneral" rows="2" placeholder="Introduce the natural phenomenon (e.g., A rainbow is a colorful arc that appears in the sky...)" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-blue-700 mb-1">3. Sequenced Explanation Step 1 (Tahap Pertama)</label>
+                            <input type="text" id="essayStep1" placeholder="e.g., First, sunlight passes through raindrops in the air..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-blue-700 mb-1">4. Sequenced Explanation Step 2 (Tahap Kedua)</label>
+                            <input type="text" id="essayStep2" placeholder="e.g., Next, the light bends and separates into seven colors..." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-red-700 mb-1">5. Closing Sentence (Kesimpulan)</label>
+                            <input type="text" id="essayClosing" placeholder="e.g., As a result, we can see a beautiful rainbow after it rains." class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-red-400 focus:outline-none">
+                        </div>
+
+                        <button onclick="generateEssayPreview()" class="bg-red-500 hover:bg-red-600 text-white font-bold px-6 py-3 rounded-xl shadow transition flex items-center gap-2">
+                            <i class="fa-solid fa-file-export"></i> Generate My Essay Preview
+                        </button>
+                    </div>
+
+                    <!-- Essay Preview Container -->
+                    <div id="essayPreviewBox" class="hidden pt-4 border-t space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold font-fredoka text-slate-800">Your Formatted Explanation Text:</h4>
+                            <button onclick="copyEssayText()" class="bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-slate-900 transition flex items-center gap-1">
+                                <i class="fa-solid fa-copy"></i> Copy Text
+                            </button>
+                        </div>
+                        <div id="essayPreviewContent" class="bg-amber-50 p-5 rounded-2xl border border-amber-200 text-sm leading-relaxed text-slate-800 space-y-2"></div>
+
+                        <!-- Self Assessment Checklist -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
+                            <span class="font-bold text-slate-700 block">Self-Assessment Checklist:</span>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="rounded text-red-500">
+                                <span>I used a clear title and introductory statement.</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="rounded text-red-500">
+                                <span>I used chronological connectives (First, Next, As a result).</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" class="rounded text-red-500">
+                                <span>I used simple present tense sentences.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 6. TAB TENTANG ==================== -->
+        <section id="content-about" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-slate-800 to-blue-900 rounded-3xl p-6 text-white shadow-md">
+                <h2 class="text-2xl font-bold font-fredoka flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-amber-400"></i> Tentang Media Pembelajaran Interaktif
+                </h2>
+                <p class="text-sm text-slate-300 mt-1">Informasi Pengembang dan Spesifikasi Modul Pembelajaran Web</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Developer Profile Card -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4 text-center md:col-span-1 flex flex-col items-center">
+                    <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-red-500 via-amber-400 to-blue-600 p-1 shadow-lg">
+                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-4xl text-slate-800">
+                            👩‍🏫
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold font-fredoka text-lg text-slate-800">Neneng Noeraeni Aprianti, M.Pd</h3>
+                        <p class="text-xs font-semibold text-blue-600">Guru Bahasa Inggris SMP</p>
+                    </div>
+                    <div class="text-xs text-slate-500 space-y-2 text-left w-full border-t pt-3">
+                        <p><i class="fa-solid fa-school text-brandRed mr-2"></i><strong>Sasaran:</strong> Siswa SMP Kelas 9 (Fase D)</p>
+                        <p><i class="fa-solid fa-book-bookmark text-brandBlue mr-2"></i><strong>Materi:</strong> Explanation Text (Life Phenomena)</p>
+                        <p><i class="fa-solid fa-code text-brandYellow mr-2"></i><strong>Teknologi:</strong> Single-File HTML5, Tailwind CSS, Web Audio API</p>
+                    </div>
+                </div>
+
+                <!-- App Details & Instructions -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4 md:col-span-2">
+                    <h3 class="font-bold font-fredoka text-lg text-slate-800 border-b pb-2">
+                        Panduan Penggunaan & Keunggulan Media
+                    </h3>
+                    <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                        <p>
+                            Media pembelajaran interaktif ini dirancang khusus untuk memfasilitasi pembelajaran mandiri maupun terbimbing pada mata pelajaran Bahasa Inggris SMP Kelas 9 Kurikulum Merdeka.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                            <div class="p-3 bg-red-50 rounded-xl border border-red-100 space-y-1">
+                                <span class="font-bold text-red-600 text-xs flex items-center gap-1"><i class="fa-solid fa-bolt"></i> Single Page Application</span>
+                                <p class="text-xs text-slate-500">Dapat dijalankan dengan cepat tanpa perlu reload halaman web.</p>
+                            </div>
+                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 space-y-1">
+                                <span class="font-bold text-blue-600 text-xs flex items-center gap-1"><i class="fa-solid fa-volume-high"></i> Audio TTS Integration</span>
+                                <p class="text-xs text-slate-500">Dilengkapi fitur audio suara asli untuk pelafalan kosakata Inggris.</p>
+                            </div>
+                            <div class="p-3 bg-amber-50 rounded-xl border border-amber-100 space-y-1">
+                                <span class="font-bold text-amber-700 text-xs flex items-center gap-1"><i class="fa-solid fa-gamepad"></i> Game & Kuis Interaktif</span>
+                                <p class="text-xs text-slate-500">Latihan menyusun kalimat, matching game, dan kuis berhadiah bintang.</p>
+                            </div>
+                            <div class="p-3 bg-green-50 rounded-xl border border-green-100 space-y-1">
+                                <span class="font-bold text-green-700 text-xs flex items-center gap-1"><i class="fa-solid fa-mobile-screen"></i> Responsif Multi-Device</span>
+                                <p class="text-xs text-slate-500">Tampilan adaptif dan nyaman diakses melalui smartphone, tablet, maupun laptop.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-4 border-t-4 border-amber-400 text-center text-xs space-y-1">
+        <p class="font-semibold text-slate-200">Media Pembelajaran Interaktif Bahasa Inggris SMP Kelas 9 &copy; 2026</p>
+        <p>Dikembangkan oleh <strong>Neneng Noeraeni Aprianti, M.Pd</strong> • Kurikulum Merdeka (Fase D)</p>
+    </footer>
+
+    <!-- MODAL STAR CELEBRATION FOR QUIZ COMPLETION -->
+    <div id="quizResultModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full text-center space-y-4 border-4 border-amber-400 shadow-2xl transform transition-all scale-100">
+            <div class="text-6xl text-amber-400 animate-bounce">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-fredoka text-slate-800">Awesome Job!</h3>
+            <p id="modalScoreText" class="text-sm font-semibold text-slate-600">Kamu mendapatkan skor 5/5!</p>
+            <div id="modalStars" class="text-3xl text-amber-400 space-x-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <button onclick="closeModal()" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold py-3 rounded-2xl shadow transition">
+                Continue Learning
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        /* --------------------------------------------------
+         * 1. WEB AUDIO API SYNTHESIZER SOUND EFFECTS
+         * -------------------------------------------------- */
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (type === 'click') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(500, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(250, ctx.currentTime + 0.08);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.08);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.08);
+                } else if (type === 'success') {
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+                        gain.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.08);
+                        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + idx * 0.08 + 0.2);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(ctx.currentTime + idx * 0.08);
+                        osc.stop(ctx.currentTime + idx * 0.08 + 0.2);
+                    });
+                } else if (type === 'erupt') {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(80, ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(180, ctx.currentTime + 0.4);
+                    osc.frequency.linearRampToValueAtTime(40, ctx.currentTime + 1.0);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.0);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 1.0);
+                }
+            } catch(e) {
+                console.log('Audio Context not allowed without user gesture yet');
+            }
+        }
+
+        /* --------------------------------------------------
+         * 2. TEXT-TO-SPEECH (TTS) NATIVE WEB SPEECH
+         * -------------------------------------------------- */
+        function speakText(text) {
+            playSound('click');
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        /* --------------------------------------------------
+         * 3. NAVIGATION TAB SWITCHING (SPA)
+         * -------------------------------------------------- */
+        function switchTab(tabId) {
+            playSound('click');
+            const tabs = ['home', 'objective', 'material', 'quiz', 'exercises', 'about'];
+            
+            tabs.forEach(t => {
+                const content = document.getElementById(`content-${t}`);
+                const navBtn = document.getElementById(`tab-${t}`);
+                
+                if (t === tabId) {
+                    content.classList.remove('hidden');
+                    content.classList.add('block');
+                    navBtn.className = 'nav-btn bg-amber-400 text-slate-900 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2 shadow';
+                } else {
+                    content.classList.add('hidden');
+                    content.classList.remove('block');
+                    navBtn.className = 'nav-btn text-white hover:bg-white/10 px-4 py-2.5 rounded-xl font-bold font-fredoka text-sm transition-all flex items-center gap-2';
+                }
+            });
+        }
+
+        /* --------------------------------------------------
+         * 4. CHECKLIST / TARGET PROGRESS TRACKER
+         * -------------------------------------------------- */
+        function updateChecklist() {
+            const checkboxes = document.querySelectorAll('#checklistContainer input[type="checkbox"]');
+            let checkedCount = 0;
+            checkboxes.forEach(cb => { if(cb.checked) checkedCount++; });
+            
+            const percent = Math.round((checkedCount / checkboxes.length) * 100);
+            document.getElementById('checklistPercentage').textContent = `${percent}% Completed`;
+            document.getElementById('checklistBar').style.width = `${percent}%`;
+
+            if(percent === 100) playSound('success');
+        }
+
+        /* --------------------------------------------------
+         * 5. ANIMATED VOLCANO CANVAS SIMULATION
+         * -------------------------------------------------- */
+        const canvas = document.getElementById('volcanoCanvas');
+        const ctx = canvas.getContext('2d');
+        let currentVolcanoStage = 0;
+        let animationParticles = [];
+
+        function drawVolcano() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Sky background
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            if (currentVolcanoStage === 2) {
+                skyGradient.addColorStop(0, '#450A0A'); // Fiery dark red
+                skyGradient.addColorStop(1, '#7C2D12');
+            } else {
+                skyGradient.addColorStop(0, '#0F172A'); // Slate night sky
+                skyGradient.addColorStop(1, '#1E293B');
+            }
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Underground crust
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(0, 260, canvas.width, 90);
+
+            // Magma Chamber (Bottom subterranean)
+            const chamberGlow = currentVolcanoStage > 0 ? '#EF4444' : '#B91C1C';
+            ctx.beginPath();
+            ctx.arc(400, 310, 45, 0, Math.PI * 2);
+            ctx.fillStyle = chamberGlow;
+            ctx.fill();
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#F59E0B';
+            ctx.stroke();
+
+            // Volcano Mountain Shape
+            ctx.beginPath();
+            ctx.moveTo(150, 260);
+            ctx.lineTo(350, 120); // Left crater ridge
+            ctx.lineTo(450, 120); // Right crater ridge
+            ctx.lineTo(650, 260);
+            ctx.closePath();
+            ctx.fillStyle = '#475569';
+            ctx.fill();
+
+            // Conduit / Vent
+            ctx.fillStyle = currentVolcanoStage > 0 ? '#F59E0B' : '#64748B';
+            ctx.fillRect(385, 120, 30, 140);
+
+            // Volcano Slopes Overlay
+            ctx.beginPath();
+            ctx.moveTo(150, 260);
+            ctx.lineTo(350, 120);
+            ctx.lineTo(385, 120);
+            ctx.lineTo(385, 260);
+            ctx.fillStyle = '#334155';
+            ctx.fill();
+
+            // Lava Flows on mountain slopes if Stage >= 2
+            if (currentVolcanoStage >= 2) {
+                ctx.beginPath();
+                ctx.moveTo(360, 120);
+                ctx.quadraticCurveTo(310, 180, 280, 260);
+                ctx.lineWidth = 12;
+                ctx.strokeStyle = '#EF4444';
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(440, 120);
+                ctx.quadraticCurveTo(490, 180, 520, 260);
+                ctx.lineWidth = 12;
+                ctx.strokeStyle = '#EF4444';
+                ctx.stroke();
+            }
+
+            // Labels with Pins
+            drawLabelPin(400, 310, "Magma Chamber");
+            drawLabelPin(400, 180, "Vent / Conduit");
+            drawLabelPin(400, 100, "Crater Peak");
+
+            // Particles update & draw (Lava & Ash)
+            updateParticles();
+        }
+
+        function drawLabelPin(x, y, text) {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 11px Nunito, sans-serif';
+            ctx.fillText(text, x - 35, y + 4);
+        }
+
+        function triggerEruptionStage(stage) {
+            playSound('erupt');
+            currentVolcanoStage = stage;
+            const titleEl = document.getElementById('volcanoInfoTitle');
+            const descEl = document.getElementById('volcanoInfoDesc');
+
+            if (stage === 1) {
+                titleEl.textContent = "Stage 1: Magma Pressure Build-up";
+                descEl.textContent = "Heat deep inside Earth causes rock to melt into liquid magma. Gas bubbles expand and push magma upwards through the vent.";
+                createParticles('pressure');
+            } else if (stage === 2) {
+                titleEl.textContent = "Stage 2: Peak Volcanic Eruption";
+                descEl.textContent = "Intense pressure forces the volcano to erupt violently! Lava, toxic gases, and ash clouds are thrown high into the sky.";
+                createParticles('erupt');
+            } else if (stage === 3) {
+                titleEl.textContent = "Stage 3: Lava Flow & Ash Cloud Settlement";
+                descEl.textContent = "Lava streams slowly flow down the mountain slopes, cooling into solid volcanic rock while ash settles down.";
+                createParticles('flow');
+            }
+        }
+
+        function createParticles(type) {
+            animationParticles = [];
+            const count = type === 'erupt' ? 60 : 30;
+            for (let i = 0; i < count; i++) {
+                animationParticles.push({
+                    x: 400 + (Math.random() * 20 - 10),
+                    y: 110,
+                    vx: (Math.random() - 0.5) * 6,
+                    vy: Math.random() * -6 - 2,
+                    radius: Math.random() * 5 + 3,
+                    color: Math.random() > 0.5 ? '#EF4444' : '#F59E0B'
+                });
+            }
+        }
+
+        function updateParticles() {
+            animationParticles.forEach((p) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.15; // Gravity
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+        }
+
+        function resetVolcano() {
+            playSound('click');
+            currentVolcanoStage = 0;
+            animationParticles = [];
+            document.getElementById('volcanoInfoTitle').textContent = "Stage 0: Normal Volcano Condition";
+            document.getElementById('volcanoInfoDesc').textContent = "The volcano is calm. Magma rests deep inside the magma chamber beneath the crust.";
+        }
+
+        // Loop Canvas Animation
+        function animateCanvas() {
+            drawVolcano();
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* --------------------------------------------------
+         * 6. TEXT HIGHLIGHTER TOGGLE (MATERIAL TAB)
+         * -------------------------------------------------- */
+        function toggleHighlight(type) {
+            playSound('click');
+            clearHighlights();
+            if (type === 'general') {
+                document.getElementById('part-gen').className = 'highlight-general';
+            } else if (type === 'sequence') {
+                document.getElementById('part-seq1').className = 'highlight-sequence';
+                document.getElementById('part-seq2').className = 'highlight-sequence';
+            } else if (type === 'language') {
+                document.getElementById('lang-conn1').className = 'highlight-language';
+                document.getElementById('lang-conn2').className = 'highlight-language';
+                document.getElementById('lang-conn3').className = 'highlight-language';
+                document.getElementById('lang-pass1').className = 'highlight-language';
+                document.getElementById('lang-pass2').className = 'highlight-language';
+            }
+        }
+
+        function clearHighlights() {
+            document.getElementById('part-gen').className = '';
+            document.getElementById('part-seq1').className = '';
+            document.getElementById('part-seq2').className = '';
+            document.getElementById('lang-conn1').className = '';
+            document.getElementById('lang-conn2').className = '';
+            document.getElementById('lang-conn3').className = '';
+            document.getElementById('lang-pass1').className = '';
+            document.getElementById('lang-pass2').className = '';
+        }
+
+        /* --------------------------------------------------
+         * 7. KUIS INTERAKTIF (5 MCQs LITERACY ACTIVITY)
+         * -------------------------------------------------- */
+        const quizData = [
+            {
+                q: "1. What is the main purpose of the text above?",
+                options: [
+                    "To persuade readers to visit a volcanic mountain",
+                    "To explain how volcanic eruptions happen",
+                    "To describe a specific volcanic eruption in history",
+                    "To warn people about natural disaster hazards"
+                ],
+                correct: 1,
+                explanation: "Correct! Explanation text aims to explain the process of how volcanic eruptions occur."
+            },
+            {
+                q: "2. Where does magma collect before an eruption occurs?",
+                options: [
+                    "In the Earth's atmosphere",
+                    "On top of the crater peak",
+                    "In magma chambers beneath volcanoes",
+                    "Inside river beds and oceans"
+                ],
+                correct: 2,
+                explanation: "Correct! Magma rises and accumulates in magma chambers beneath Earth's crust."
+            },
+            {
+                q: "3. Why does magma rise upwards towards Earth's surface?",
+                options: [
+                    "Because it is heavier than solid rock",
+                    "Because it is lighter than the solid rock around it",
+                    "Because of cold weather on the surface",
+                    "Because ocean rain pushes it up"
+                ],
+                correct: 1,
+                explanation: "Correct! Liquid magma is less dense (lighter) than the surrounding solid rocks."
+            },
+            {
+                q: "4. According to paragraph 2, what causes the intense pressure in magma?",
+                options: [
+                    "Gas dissolved in the magma expanding over time",
+                    "Heavy rain falling onto the mountain",
+                    "Strong winds blowing near the crater",
+                    "Ocean waves crashing into the shore"
+                ],
+                correct: 0,
+                explanation: "Correct! Dissolved gases inside the trapped magma expand, building intense pressure."
+            },
+            {
+                q: "5. 'As a result, ash, hot gas, and liquid lava are forcefully ejected...' What does 'As a result' signal?",
+                options: [
+                    "A contrast or disagreement",
+                    "A chronological sequence or cause-and-effect outcome",
+                    "An example of place",
+                    "A greeting"
+                ],
+                correct: 1,
+                explanation: "Correct! 'As a result' is a connective used to signal cause-and-effect in Explanation Text."
+            }
+        ];
+
+        let userAnswers = [-1, -1, -1, -1, -1];
+
+        function renderQuiz() {
+            const container = document.getElementById('quizQuestionsContainer');
+            container.innerHTML = '';
+
+            quizData.forEach((item, qIdx) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-3xl shadow-md border-2 border-slate-100 space-y-4';
+
+                let optionsHtml = '';
+                item.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <button onclick="selectQuizAnswer(${qIdx}, ${optIdx})" id="q${qIdx}-opt${optIdx}" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 text-sm font-semibold hover:border-amber-400 hover:bg-amber-50 transition flex items-center justify-between">
+                            <span>${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                            <i id="q${qIdx}-icon${optIdx}" class="fa-regular fa-circle text-slate-300 text-lg"></i>
+                        </button>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <h4 class="font-bold font-fredoka text-slate-800 text-base">${item.q}</h4>
+                    <div class="space-y-2">${optionsHtml}</div>
+                    <div id="q${qIdx}-feedback" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectQuizAnswer(qIdx, optIdx) {
+            playSound('click');
+            userAnswers[qIdx] = optIdx;
+            const q = quizData[qIdx];
+            const feedbackEl = document.getElementById(`q${qIdx}-feedback`);
+
+            // Reset option button styles
+            q.options.forEach((_, i) => {
+                const btn = document.getElementById(`q${qIdx}-opt${i}`);
+                const icon = document.getElementById(`q${qIdx}-icon${i}`);
+                btn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 text-sm font-semibold transition flex items-center justify-between";
+                icon.className = "fa-regular fa-circle text-slate-300 text-lg";
+            });
+
+            // Highlight chosen option
+            const chosenBtn = document.getElementById(`q${qIdx}-opt${optIdx}`);
+            const chosenIcon = document.getElementById(`q${qIdx}-icon${optIdx}`);
+            feedbackEl.classList.remove('hidden');
+
+            if (optIdx === q.correct) {
+                playSound('success');
+                chosenBtn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-green-500 bg-green-50 text-green-900 text-sm font-semibold transition flex items-center justify-between";
+                chosenIcon.className = "fa-solid fa-circle-check text-green-600 text-lg";
+                feedbackEl.className = "p-3 rounded-xl text-xs font-bold bg-green-100 text-green-800 border border-green-200";
+                feedbackEl.textContent = "✔ " + q.explanation;
+            } else {
+                chosenBtn.className = "w-full text-left p-3.5 rounded-2xl border-2 border-red-500 bg-red-50 text-red-900 text-sm font-semibold transition flex items-center justify-between";
+                chosenIcon.className = "fa-solid fa-circle-xmark text-red-500 text-lg";
+                feedbackEl.className = "p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-200";
+                feedbackEl.textContent = "✖ Incorrect. Try again! Hint: Read paragraph " + (qIdx < 3 ? "1" : "2") + " carefully.";
+            }
+
+            // Update Score Tracker
+            let score = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === quizData[idx].correct) score++;
+            });
+            document.getElementById('quizScoreText').textContent = `${score} / 5`;
+
+            // Check if all answered correctly to trigger modal
+            if (score === 5) {
+                setTimeout(() => {
+                    document.getElementById('quizResultModal').classList.remove('hidden');
+                    playSound('success');
+                }, 400);
+            }
+        }
+
+        function resetQuiz() {
+            playSound('click');
+            userAnswers = [-1, -1, -1, -1, -1];
+            document.getElementById('quizScoreText').textContent = '0 / 5';
+            renderQuiz();
+        }
+
+        function closeModal() {
+            playSound('click');
+            document.getElementById('quizResultModal').classList.add('hidden');
+        }
+
+        renderQuiz();
+
+        /* --------------------------------------------------
+         * 8. LATIHAN SUBTABS NAVIGATION
+         * -------------------------------------------------- */
+        function switchExerciseSubtab(subId) {
+            playSound('click');
+            const subtabs = ['reorder', 'match', 'essay'];
+            subtabs.forEach(s => {
+                const content = document.getElementById(`exercise-${s}`);
+                const btn = document.getElementById(`subtab-${s}`);
+                if (s === subId.replace('sub-', '')) {
+                    content.classList.remove('hidden');
+                    btn.className = "sub-nav-btn bg-blue-600 text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow transition";
+                } else {
+                    content.classList.add('hidden');
+                    btn.className = "sub-nav-btn bg-slate-200 text-slate-700 hover:bg-slate-300 px-4 py-2.5 rounded-xl font-bold text-sm transition";
+                }
+            });
+        }
+
+        /* --------------------------------------------------
+         * 9. EXERCISE A: REORDERING SENTENCES TASK
+         * -------------------------------------------------- */
+        const initialRainSentences = [
+            { id: 3, text: "As water vapor rises higher, it cools down and condenses into small water droplets, forming clouds." },
+            { id: 1, text: "First, heat from the sun warms up the water in oceans, lakes, and rivers." },
+            { id: 4, text: "When clouds become heavy with water droplets, gravity pulls them down to Earth as rain." },
+            { id: 2, text: "Next, the warmed water evaporates and turns into invisible water vapor rising into the air." },
+            { id: 5, text: "Finally, rainwater flows back into rivers and oceans, and the water cycle repeats again." }
+        ];
+
+        let currentReorderList = [...initialRainSentences];
+
+        function renderReorderTask() {
+            const container = document.getElementById('reorderContainer');
+            container.innerHTML = '';
+
+            currentReorderList.forEach((item, idx) => {
+                const row = document.createElement('div');
+                row.className = 'bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 flex items-center justify-between gap-3 shadow-sm';
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">${idx + 1}</span>
+                        <p class="text-xs md:text-sm font-semibold text-slate-700">${item.text}</p>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <button onclick="moveReorderItem(${idx}, -1)" class="bg-amber-400 text-slate-900 w-7 h-7 rounded-lg text-xs font-bold hover:bg-amber-500 transition"><i class="fa-solid fa-arrow-up"></i></button>
+                        <button onclick="moveReorderItem(${idx}, 1)" class="bg-amber-400 text-slate-900 w-7 h-7 rounded-lg text-xs font-bold hover:bg-amber-500 transition"><i class="fa-solid fa-arrow-down"></i></button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function moveReorderItem(index, direction) {
+            playSound('click');
+            const targetIdx = index + direction;
+            if (targetIdx < 0 || targetIdx >= currentReorderList.length) return;
+            const temp = currentReorderList[index];
+            currentReorderList[index] = currentReorderList[targetIdx];
+            currentReorderList[targetIdx] = temp;
+            renderReorderTask();
+        }
+
+        function checkReorderAnswer() {
+            let isCorrect = true;
+            for (let i = 0; i < currentReorderList.length; i++) {
+                if (currentReorderList[i].id !== i + 1) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+
+            const feedback = document.getElementById('reorderFeedback');
+            feedback.classList.remove('hidden');
+
+            if (isCorrect) {
+                playSound('success');
+                feedback.className = "p-4 rounded-2xl text-sm font-semibold bg-green-100 border border-green-300 text-green-900 space-y-1";
+                feedback.innerHTML = `
+                    <div class="font-bold text-base flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-600"></i> Perfect! You ordered the Rain Cycle correctly!</div>
+                    <p class="text-xs">All 5 sentences are placed in logical order from evaporation to precipitation.</p>
+                `;
+            } else {
+                playSound('click');
+                feedback.className = "p-4 rounded-2xl text-sm font-semibold bg-red-100 border border-red-300 text-red-900";
+                feedback.textContent = "✖ Not quite right yet! Check the chronological connectives like 'First', 'Next', and 'Finally' to place them correctly.";
+            }
+        }
+
+        function resetReorderTask() {
+            playSound('click');
+            currentReorderList = [...initialRainSentences];
+            document.getElementById('reorderFeedback').classList.add('hidden');
+            renderReorderTask();
+        }
+
+        renderReorderTask();
+
+        /* --------------------------------------------------
+         * 10. EXERCISE B: MATCHING GAME
+         * -------------------------------------------------- */
+        const disasterItems = [
+            { id: 1, name: "Volcanic Eruption", icon: "fa-volcano" },
+            { id: 2, name: "Tsunami", icon: "fa-water" },
+            { id: 3, name: "Earthquake", icon: "fa-house-crack" },
+            { id: 4, name: "Flood", icon: "fa-cloud-showers-heavy" },
+            { id: 5, name: "Landslide", icon: "fa-hill-rockslide" }
+        ];
+
+        const definitionItems = [
+            { id: 3, def: "A sudden shaking of the ground caused by the movement of Earth's tectonic plates." },
+            { id: 1, def: "An event where molten magma, gases, and ash escape through an opening in Earth's crust." },
+            { id: 5, def: "The downward movement of masses of rock, earth, or debris down a slope." },
+            { id: 2, def: "A series of giant ocean waves caused by underwater earthquakes or eruptions." },
+            { id: 4, def: "An overflow of a large amount of water beyond its normal limits onto dry land." }
+        ];
+
+        let selectedDisasterId = null;
+        let matchedPairsCount = 0;
+
+        function renderMatchingGame() {
+            const disasterCol = document.getElementById('matchDisasterCol');
+            const defCol = document.getElementById('matchDefCol');
+
+            disasterCol.innerHTML = '';
+            defCol.innerHTML = '';
+
+            disasterItems.forEach(item => {
+                const card = document.createElement('button');
+                card.id = `disaster-card-${item.id}`;
+                card.onclick = () => selectDisasterMatch(item.id);
+                card.className = "w-full p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-amber-50 hover:border-amber-400 font-bold text-sm text-slate-800 text-left flex items-center justify-between transition";
+                card.innerHTML = `
+                    <span><i class="fa-solid ${item.icon} text-amber-500 mr-2"></i> ${item.name}</span>
+                    <i class="fa-regular fa-circle text-slate-300"></i>
+                `;
+                disasterCol.appendChild(card);
+            });
+
+            definitionItems.forEach(item => {
+                const card = document.createElement('button');
+                card.id = `def-card-${item.id}`;
+                card.onclick = () => selectDefMatch(item.id);
+                card.className = "w-full p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-400 font-medium text-xs text-slate-700 text-left transition";
+                card.textContent = item.def;
+                defCol.appendChild(card);
+            });
+        }
+
+        function selectDisasterMatch(id) {
+            playSound('click');
+            selectedDisasterId = id;
+
+            disasterItems.forEach(item => {
+                const card = document.getElementById(`disaster-card-${item.id}`);
+                if (item.id === id) {
+                    card.className = "w-full p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-100 font-bold text-sm text-amber-900 text-left flex items-center justify-between transition";
+                } else if (!card.disabled) {
+                    card.className = "w-full p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-amber-50 hover:border-amber-400 font-bold text-sm text-slate-800 text-left flex items-center justify-between transition";
+                }
+            });
+        }
+
+        function selectDefMatch(defId) {
+            if (!selectedDisasterId) return;
+
+            const disasterCard = document.getElementById(`disaster-card-${selectedDisasterId}`);
+            const defCard = document.getElementById(`def-card-${defId}`);
+
+            if (selectedDisasterId === defId) {
+                playSound('success');
+                matchedPairsCount++;
+                document.getElementById('matchCounter').textContent = matchedPairsCount;
+
+                disasterCard.className = "w-full p-3.5 rounded-2xl border-2 border-green-500 bg-green-100 text-green-900 font-bold text-sm text-left flex items-center justify-between";
+                disasterCard.disabled = true;
+
+                defCard.className = "w-full p-3.5 rounded-2xl border-2 border-green-500 bg-green-100 text-green-900 font-medium text-xs text-left";
+                defCard.disabled = true;
+
+                selectedDisasterId = null;
+
+                if (matchedPairsCount === 5) playSound('success');
+            } else {
+                playSound('click');
+                defCard.className = "w-full p-3.5 rounded-2xl border-2 border-red-500 bg-red-100 text-red-900 font-medium text-xs text-left";
+                setTimeout(() => {
+                    if (!defCard.disabled) defCard.className = "w-full p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-400 font-medium text-xs text-slate-700 text-left transition";
+                }, 600);
+            }
+        }
+
+        function resetMatchingGame() {
+            playSound('click');
+            selectedDisasterId = null;
+            matchedPairsCount = 0;
+            document.getElementById('matchCounter').textContent = '0';
+            renderMatchingGame();
+        }
+
+        renderMatchingGame();
+
+        /* --------------------------------------------------
+         * 11. EXERCISE C: GUIDED ESSAY WRITER
+         * -------------------------------------------------- */
+        function generateEssayPreview() {
+            playSound('success');
+            const title = document.getElementById('essayTitle').value.trim() || "Natural Phenomenon";
+            const general = document.getElementById('essayGeneral').value.trim() || "A phenomenon occurs naturally in our environment.";
+            const step1 = document.getElementById('essayStep1').value.trim() || "First, the process begins underground or in the atmosphere.";
+            const step2 = document.getElementById('essayStep2').value.trim() || "Next, energy and pressure build up continuous reaction.";
+            const closing = document.getElementById('essayClosing').value.trim() || "As a result, we observe this amazing phenomenon.";
+
+            const previewContent = document.getElementById('essayPreviewContent');
+            previewContent.innerHTML = `
+                <h3 class="text-center font-bold font-fredoka text-xl text-red-600 border-b pb-2 mb-2">${title.toUpperCase()}</h3>
+                <p><strong>[General Statement]</strong> ${general}</p>
+                <p><strong>[Sequenced Explanation]</strong> ${step1} ${step2}</p>
+                <p><strong>[Closing]</strong> ${closing}</p>
+            `;
+
+            document.getElementById('essayPreviewBox').classList.remove('hidden');
+        }
+
+        function copyEssayText() {
+            playSound('click');
+            const previewContent = document.getElementById('essayPreviewContent').innerText;
+            
+            // Clipboard fallback logic
+            const textarea = document.createElement('textarea');
+            textarea.value = previewContent;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            alert("Essay text copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
